@@ -16,8 +16,6 @@ steps:
     image: plugins/docker:linux-amd64
     settings:
       repo: zhydzetski/ws-test
-      build_args:
-        - BUILD_TIME=$(cat .build_time)
       username:
         from_secret: docker_username
       password:

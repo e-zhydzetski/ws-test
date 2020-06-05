@@ -13,10 +13,8 @@ COPY go.mod go.sum ./
 RUN go mod download
 RUN go get google.golang.org/protobuf/cmd/protoc-gen-go
 COPY . .
-ARG BUILD_TIME
-RUN echo "Build time: ${BUILD_TIME}"
 RUN go generate ./... && \
-    CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -ldflags "-w -s -X main.buildTime=${BUILD_TIME}" -o ws-test
+    CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -ldflags "-w -s" -o ws-test
 
 # final stage
 FROM alpine:3.11.6
