@@ -1,0 +1,20 @@
+version: "2"
+
+services:
+  server:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: ["--server", "--server-epoll", "--debug=:8000"]
+    environment:
+      - GOMAXPROCS=2
+    ports:
+      - "8888:8888"
+      - "8000:8000"
+  client:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: ["--client-connect-addr=ws://server:8888"]
+    environment:
+      - GOMAXPROCS=2

@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+option go_package = "api";
+
+import "google/protobuf/any.proto";
+
+message ClientID {
+  string id = 1;
+}
+
+message ServerPing {
+  string client_id = 1;
+}
+
+message ClientPong {
+  string client_id = 1;
+}
+
+message Msg {
+  google.protobuf.Any body = 1;
+}
+
