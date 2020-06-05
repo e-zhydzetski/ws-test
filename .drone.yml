@@ -1,0 +1,27 @@
+---
+kind: pipeline
+name: default
+
+platform:
+  os: linux
+  arch: amd64
+
+steps:
+  - name: prepare
+    image: alpine:3.11.6
+    commands:
+      - date '+%Y%m%d%H%M%S' > .build_time
+      - echo "latest,$(cat .build_time)" > .tags
+  - name: docker
+    image: plugins/docker:linux-amd64
+    settings:
+      repo: zhydzetski/ws-test
+      build_args:
+        - BUILD_TIME=`cat .build_time`
+      username:
+        from_secret: docker_username
+      password:
+        from_secret: docker_password
+trigger:
+  branch:
+    - master
