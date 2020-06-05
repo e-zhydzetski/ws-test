@@ -51,7 +51,7 @@ linters:
     - gocritic
     - gocyclo
 #    - gofmt # as goimports does everything that gofmt does. Additionally it checks unused imports
-#    - goimports # https://github.com/golangci/golangci-lint/issues/580
+    - goimports
     - golint
     - gosec
     - gosimple

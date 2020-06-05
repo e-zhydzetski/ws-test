@@ -4,17 +4,19 @@ import (
 	"context"
 	"errors"
 	"fmt"
-	"github.com/e-zhydzetski/ws-test/api"
-	"github.com/e-zhydzetski/ws-test/util"
-	"github.com/gobwas/ws"
-	"github.com/gobwas/ws/wsutil"
-	"github.com/golang/protobuf/proto"
-	"golang.org/x/sync/errgroup"
 	"math/rand"
 	"net"
 	"strconv"
 	"sync"
 	"time"
+
+	"github.com/gobwas/ws"
+	"github.com/gobwas/ws/wsutil"
+	"github.com/golang/protobuf/proto"
+	"golang.org/x/sync/errgroup"
+
+	"github.com/e-zhydzetski/ws-test/api"
+	"github.com/e-zhydzetski/ws-test/util"
 )
 
 const ioTimeout = 1 * time.Second // TODO make configurable

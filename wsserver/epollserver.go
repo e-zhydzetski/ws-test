@@ -2,12 +2,13 @@ package wsserver
 
 import (
 	"context"
-	"github.com/gobwas/ws"
-	"github.com/mailru/easygo/netpoll"
-	"golang.org/x/sync/errgroup"
 	"log"
 	"net"
 	"time"
+
+	"github.com/gobwas/ws"
+	"github.com/mailru/easygo/netpoll"
+	"golang.org/x/sync/errgroup"
 )
 
 type SessionRegistrar func(session Session)

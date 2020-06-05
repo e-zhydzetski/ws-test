@@ -2,11 +2,12 @@ package wsserver
 
 import (
 	"context"
-	"github.com/gobwas/ws"
-	"golang.org/x/sync/errgroup"
 	"log"
 	"net"
 	"time"
+
+	"github.com/gobwas/ws"
+	"golang.org/x/sync/errgroup"
 )
 
 func StartSimpleServer(ctx context.Context, g *errgroup.Group, listenAddr string, registrar SessionRegistrar) {

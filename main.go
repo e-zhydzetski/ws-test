@@ -4,12 +4,13 @@ import (
 	"context"
 	"flag"
 	"fmt"
-	"github.com/e-zhydzetski/ws-test/util"
 	"log"
 	"net/http"
 	_ "net/http/pprof" //nolint:gosec // G108, http server starts only by --debug flag
 	"os"
 	"time"
+
+	"github.com/e-zhydzetski/ws-test/util"
 )
 
 var buildTime string //nolint:gochecknoglobals // build tag

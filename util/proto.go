@@ -2,9 +2,11 @@ package util
 
 import (
 	"fmt"
-	"github.com/e-zhydzetski/ws-test/api"
+
 	"github.com/golang/protobuf/proto"
 	"github.com/golang/protobuf/ptypes"
+
+	"github.com/e-zhydzetski/ws-test/api"
 )
 
 func MarshalProtoMessage(msg proto.Message) ([]byte, error) {

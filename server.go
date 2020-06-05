@@ -4,12 +4,14 @@ import (
 	"context"
 	"errors"
 	"fmt"
+	"time"
+
+	"github.com/golang/protobuf/proto"
+	"golang.org/x/sync/errgroup"
+
 	"github.com/e-zhydzetski/ws-test/api"
 	"github.com/e-zhydzetski/ws-test/util"
 	"github.com/e-zhydzetski/ws-test/wsserver"
-	"github.com/golang/protobuf/proto"
-	"golang.org/x/sync/errgroup"
-	"time"
 )
 
 func NewEPollServer(ctx context.Context, listenAddr string, poolSize int, pingInterval time.Duration) error {

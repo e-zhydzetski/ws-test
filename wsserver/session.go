@@ -2,12 +2,14 @@ package wsserver
 
 import (
 	"context"
-	"github.com/e-zhydzetski/ws-test/util"
-	"github.com/gobwas/ws/wsutil"
-	"github.com/golang/protobuf/proto"
 	"log"
 	"net"
 	"sync"
+
+	"github.com/gobwas/ws/wsutil"
+	"github.com/golang/protobuf/proto"
+
+	"github.com/e-zhydzetski/ws-test/util"
 )
 
 type Session interface {

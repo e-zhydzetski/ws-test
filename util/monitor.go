@@ -2,10 +2,11 @@ package util
 
 import (
 	"context"
-	"golang.org/x/sync/errgroup"
 	"log"
 	"sync"
 	"time"
+
+	"golang.org/x/sync/errgroup"
 )
 
 func NewMonitor(ctx context.Context, g *errgroup.Group) *Monitor {
