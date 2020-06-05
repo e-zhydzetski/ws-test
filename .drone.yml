@@ -17,7 +17,7 @@ steps:
     settings:
       repo: zhydzetski/ws-test
       build_args:
-        - BUILD_TIME=`cat .build_time`
+        - BUILD_TIME=$(cat .build_time)
       username:
         from_secret: docker_username
       password:
