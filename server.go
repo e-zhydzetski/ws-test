@@ -6,7 +6,7 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/golang/protobuf/proto"
+	"github.com/gogo/protobuf/proto"
 	"golang.org/x/sync/errgroup"
 
 	"github.com/e-zhydzetski/ws-test/api"

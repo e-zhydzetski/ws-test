@@ -3,14 +3,14 @@ package util
 import (
 	"fmt"
 
-	"github.com/golang/protobuf/proto"
-	"github.com/golang/protobuf/ptypes"
+	"github.com/gogo/protobuf/proto"
+	"github.com/gogo/protobuf/types"
 
 	"github.com/e-zhydzetski/ws-test/api"
 )
 
 func MarshalProtoMessage(msg proto.Message) ([]byte, error) {
-	body, err := ptypes.MarshalAny(msg)
+	body, err := types.MarshalAny(msg)
 	if err != nil {
 		return nil, err
 	}
@@ -32,19 +32,19 @@ func UnmarshalProtoMessage(bytes []byte) (proto.Message, error) {
 	switch typeURL {
 	case "type.googleapis.com/ClientID":
 		var body api.ClientID
-		if err := ptypes.UnmarshalAny(msg.Body, &body); err != nil {
+		if err := types.UnmarshalAny(msg.Body, &body); err != nil {
 			return nil, err
 		}
 		return &body, nil
 	case "type.googleapis.com/ServerPing":
 		var body api.ServerPing
-		if err := ptypes.UnmarshalAny(msg.Body, &body); err != nil {
+		if err := types.UnmarshalAny(msg.Body, &body); err != nil {
 			return nil, err
 		}
 		return &body, nil
 	case "type.googleapis.com/ClientPong":
 		var body api.ClientPong
-		if err := ptypes.UnmarshalAny(msg.Body, &body); err != nil {
+		if err := types.UnmarshalAny(msg.Body, &body); err != nil {
 			return nil, err
 		}
 		return &body, nil

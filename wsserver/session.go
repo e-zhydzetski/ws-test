@@ -7,7 +7,7 @@ import (
 	"sync"
 
 	"github.com/gobwas/ws/wsutil"
-	"github.com/golang/protobuf/proto"
+	"github.com/gogo/protobuf/proto"
 
 	"github.com/e-zhydzetski/ws-test/util"
 )
