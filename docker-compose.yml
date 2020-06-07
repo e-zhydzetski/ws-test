@@ -18,3 +18,5 @@ services:
     command: ["--client-connect-addr=ws://server:8888"]
     environment:
       - GOMAXPROCS=2
+    depends_on:
+      - server
