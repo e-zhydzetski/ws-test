@@ -6,11 +6,12 @@ import (
 	"fmt"
 	"log"
 	"net/http"
-	_ "net/http/pprof" //nolint:gosec // G108, http server starts only by --debug flag
 	"os"
 	"time"
 
-	"github.com/e-zhydzetski/ws-test/util"
+	"github.com/e-zhydzetski/ws-test/internal/client"
+	"github.com/e-zhydzetski/ws-test/internal/server"
+	"github.com/e-zhydzetski/ws-test/internal/util"
 )
 
 var buildTime string //nolint:gochecknoglobals // build tag
@@ -59,11 +60,11 @@ func main() {
 	if err := func() error {
 		if serverMode {
 			if epollServer {
-				return NewEPollServer(ctx, listenAddr, serverWSPool, serverPingInterval)
+				return server.NewEPollServer(ctx, listenAddr, serverWSPool, serverPingInterval)
 			}
-			return NewSimpleServer(ctx, listenAddr, serverPingInterval)
+			return server.NewSimpleServer(ctx, listenAddr, serverPingInterval)
 		}
-		return NewClient(ctx, connectAddr, clientThreads)
+		return client.NewClient(ctx, connectAddr, clientThreads)
 	}(); err != nil {
 		log.Println("Error:", err)
 	}

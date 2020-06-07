@@ -1,4 +1,4 @@
-package main
+package client
 
 import (
 	"context"
@@ -16,7 +16,7 @@ import (
 	"golang.org/x/sync/errgroup"
 
 	"github.com/e-zhydzetski/ws-test/api"
-	"github.com/e-zhydzetski/ws-test/util"
+	"github.com/e-zhydzetski/ws-test/internal/util"
 )
 
 const ioTimeout = 1 * time.Second // TODO make configurable
@@ -63,7 +63,7 @@ func NewClient(ctx context.Context, addr string, threads int) error {
 						_ = conn.Close()
 					}()
 
-					err := writeClientMessage(conn, &api.ClientID{
+					err := writeMessage(conn, &api.ClientID{
 						Id: clientID,
 					})
 					if err != nil {
@@ -72,7 +72,7 @@ func NewClient(ctx context.Context, addr string, threads int) error {
 					monitor.Connect()
 
 					for {
-						msg, err := readServerMessage(conn)
+						msg, err := readMessage(conn)
 						if err != nil {
 							return fmt.Errorf("server ping receive error: %w", err)
 						}
@@ -82,7 +82,7 @@ func NewClient(ctx context.Context, addr string, threads int) error {
 						}
 						monitor.Read()
 
-						err = writeClientMessage(conn, &api.ClientPong{
+						err = writeMessage(conn, &api.ClientPong{
 							ClientId: clientID,
 						})
 						if err != nil {
@@ -104,7 +104,7 @@ func NewClient(ctx context.Context, addr string, threads int) error {
 	return g.Wait()
 }
 
-func readServerMessage(conn net.Conn) (proto.Message, error) {
+func readMessage(conn net.Conn) (proto.Message, error) {
 	_ = conn.SetReadDeadline(time.Time{})
 	bytes, err := wsutil.ReadServerBinary(conn)
 	if err != nil {
@@ -113,7 +113,7 @@ func readServerMessage(conn net.Conn) (proto.Message, error) {
 	return util.UnmarshalProtoMessage(bytes)
 }
 
-func writeClientMessage(conn net.Conn, msg proto.Message) error {
+func writeMessage(conn net.Conn, msg proto.Message) error {
 	bytes, err := util.MarshalProtoMessage(msg)
 	if err != nil {
 		return err

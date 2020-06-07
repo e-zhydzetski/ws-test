@@ -9,7 +9,7 @@ import (
 	"github.com/gobwas/ws/wsutil"
 	"github.com/gogo/protobuf/proto"
 
-	"github.com/e-zhydzetski/ws-test/util"
+	"github.com/e-zhydzetski/ws-test/internal/util"
 )
 
 type Session interface {
@@ -44,7 +44,7 @@ func (s *session) Context() context.Context {
 	return s.ctx
 }
 
-func (s *session) Close(err error) {
+func (s *session) Close(_ error) {
 	_ = s.conn.Close()
 	s.cancel()
 }

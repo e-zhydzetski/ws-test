@@ -14,7 +14,9 @@ RUN go mod download
 RUN go get github.com/gogo/protobuf/protoc-gen-gogofast
 COPY . .
 RUN go generate ./... && \
-    CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -ldflags "-w -s -X main.buildTime=`cat .build_time`" -o ws-test
+    export BUILD_TIME=`cat .build_time` && \
+    cd cmd/ws-test && \
+    CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -ldflags "-w -s -X main.buildTime=${BUILD_TIME}" -o ws-test
 
 # final stage
 FROM alpine:3.11.6
@@ -25,4 +27,4 @@ USER appuser
 WORKDIR /app
 ENTRYPOINT ["./ws-test"]
 CMD ["--help"]
-COPY --from=builder /workspace/ws-test ./ws-test
+COPY --from=builder /workspace/cmd/ws-test/ws-test ./ws-test

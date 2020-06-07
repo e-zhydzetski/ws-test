@@ -1,4 +1,4 @@
-package main
+package server
 
 import (
 	"context"
@@ -10,8 +10,8 @@ import (
 	"golang.org/x/sync/errgroup"
 
 	"github.com/e-zhydzetski/ws-test/api"
-	"github.com/e-zhydzetski/ws-test/util"
-	"github.com/e-zhydzetski/ws-test/wsserver"
+	"github.com/e-zhydzetski/ws-test/internal/server/wsserver"
+	"github.com/e-zhydzetski/ws-test/internal/util"
 )
 
 func NewEPollServer(ctx context.Context, listenAddr string, poolSize int, pingInterval time.Duration) error {

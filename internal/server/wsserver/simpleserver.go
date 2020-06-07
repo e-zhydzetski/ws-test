@@ -35,7 +35,7 @@ func StartSimpleServer(ctx context.Context, g *errgroup.Group, listenAddr string
 			_, err = ws.Upgrade(conn)
 			if err != nil {
 				log.Printf("%s: upgrade error: %v", nameConn(conn), err)
-				conn.Close()
+				_ = conn.Close()
 				continue
 			}
 
